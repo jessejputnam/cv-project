@@ -11,3 +11,4 @@ class Form extends Component {
     );
   }
 }
+export { Form };

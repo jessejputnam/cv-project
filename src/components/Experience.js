@@ -1,31 +1,59 @@
 import React, { Component } from "react";
+import { DatesList } from "./DatesList";
+import uniqid from "uniqid";
+
+class TaskItems extends Component {
+  render() {
+    const tasksArr = this.props.tasks;
+    const taskItems = tasksArr.map((task) => <li key={uniqid()}>{task}</li>);
+
+    return <ul>{taskItems}</ul>;
+  }
+}
+
+class ExperienceItems extends Component {
+  render() {
+    const experienceArr = this.props.experience;
+    const experienceListItems = experienceArr.map((item) => {
+      const id = uniqid();
+      return (
+        <li key={id}>
+          <p>
+            <strong>Company: </strong>
+            {item.company}
+          </p>
+          <p>
+            <strong>Position: </strong>
+            {item.position}
+          </p>
+          <p>
+            <strong>Main tasks: </strong>
+          </p>
+          <TaskItems tasks={item.tasks}></TaskItems>
+          <p>
+            <strong>Dates of employment: </strong>
+            <DatesList dates={item.dates}></DatesList>
+          </p>
+          <div className='btns__container'>
+            <button id={id} className='btn__exp--edit' type='button'>
+              Edit
+            </button>
+            <button id={id} className='btn__exp--del' type='button'>
+              Delete
+            </button>
+          </div>
+        </li>
+      );
+    });
+
+    return <ul>{experienceListItems}</ul>;
+  }
+}
 
 class Experience extends Component {
   render() {
     return (
-      <div className='experience__container'>
-        <p>
-          <strong>Company: </strong>Kennebunk Middle School
-        </p>
-        <p>
-          <strong>Position: </strong>Gifted & Talented ELA Teacher
-        </p>
-        <p>
-          <strong>Main tasks: </strong>
-        </p>
-        <ul>
-          <li>Curriculum creation and implementation</li>
-          <li>Daily lesson planning</li>
-          <li>Coordination with LA Department and G&T Program</li>
-          <li>Keeping gradebook</li>
-          <li>Social-Emotional integration and intervention</li>
-          <li>Individual and group instruction</li>
-        </ul>
-        <p>
-          <strong>Dates of employment: </strong>Aug 2021 - February 2022
-        </p>
-        <hr />
-      </div>
+      <ExperienceItems experience={this.props.experience}></ExperienceItems>
     );
   }
 }

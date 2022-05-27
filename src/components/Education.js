@@ -1,23 +1,14 @@
 import React, { Component } from "react";
-
-class DatesList extends Component {
-  render() {
-    const datesArr = this.props.dates;
-
-    return (
-      <span>
-        {datesArr[0]} - {datesArr[1]}
-      </span>
-    );
-  }
-}
+import { DatesList } from "./DatesList";
+import uniqid from "uniqid";
 
 class EducationItem extends Component {
   render() {
     const educationArr = this.props.education;
     const educationListItems = educationArr.map((item) => {
+      const id = uniqid();
       return (
-        <li key={item} className='education__container'>
+        <li key={id}>
           <p>
             <strong>University: </strong>
             {item.uni}
@@ -34,6 +25,14 @@ class EducationItem extends Component {
             <strong>Dates of Study: </strong>
             <DatesList dates={item.dates}></DatesList>
           </p>
+          <div className='btns__container'>
+            <button id={id} className='btn__educ--edit' type='button'>
+              Edit
+            </button>
+            <button id={id} className='btn__educ--del' type='button'>
+              Delete
+            </button>
+          </div>
         </li>
       );
     });

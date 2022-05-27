@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import uniqid from "uniqid";
 
 class AddressLines extends Component {
   render() {
     const addressLineArr = this.props.address;
-    const listItems = addressLineArr.map((line) => <li key={line}>{line}</li>);
+    const listItems = addressLineArr.map((line) => (
+      <li key={uniqid()}>{line}</li>
+    ));
 
     return <ul>{listItems}</ul>;
   }
@@ -12,7 +15,7 @@ class AddressLines extends Component {
 class GeneralInfo extends Component {
   render() {
     return (
-      <div className='general__container'>
+      <div>
         <p>
           <strong>Name:</strong> {this.props.name}
         </p>
