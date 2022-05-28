@@ -6,6 +6,10 @@ import { EducationForm } from "./components/EducationForm";
 import { GeneralForm } from "./components/GeneralForm";
 import { ExperienceForm } from "./components/ExperienceForm";
 
+const copyPrevArr = (object, array) => {
+  return object.state[array].slice(0, object.state[array].length - 1);
+};
+
 class App extends Component {
   constructor() {
     super();
@@ -18,7 +22,7 @@ class App extends Component {
 
       education: [
         {
-          uni: "a",
+          uni: "",
           deg: "",
           sub: "",
           dates: [""]
@@ -46,14 +50,10 @@ class App extends Component {
   };
 
   handleCallbackEduc = (childData) => {
-    console.log(this.state.education);
     // If one education at least already filled out
     if (this.state.education.length > 1) {
       // Shallow copy of prev education array minus latest addition yet to be filled
-      const prevEduc = this.state.education.slice(
-        0,
-        this.state.education.length - 1
-      );
+      const prevEduc = copyPrevArr(this, "education");
 
       this.setState({
         education: [
@@ -73,6 +73,37 @@ class App extends Component {
             uni: childData.uni,
             deg: childData.deg,
             sub: childData.sub,
+            dates: [childData.dateFrom, childData.dateTo]
+          }
+        ]
+      });
+    }
+  };
+
+  handleCallbackExp = (childData) => {
+    // If one experience at least already filled out
+    if (this.state.experience.length > 1) {
+      // Shallow copy of prev experience array minus latest addition yet to be filled
+      const prevExp = copyPrevArr(this, "experience");
+
+      this.setState({
+        experience: [
+          ...prevExp,
+          {
+            company: childData.company,
+            position: childData.position,
+            tasks: childData.tasks,
+            dates: [childData.dateFrom, childData.dateTo]
+          }
+        ]
+      });
+    } else {
+      this.setState({
+        experience: [
+          {
+            company: childData.company,
+            position: childData.position,
+            tasks: childData.tasks,
             dates: [childData.dateFrom, childData.dateTo]
           }
         ]
@@ -127,7 +158,9 @@ class App extends Component {
           <Experience experience={this.state.experience}></Experience>
         </div>
 
-        <ExperienceForm></ExperienceForm>
+        <ExperienceForm
+          parentCallbackExp={this.handleCallbackExp}
+        ></ExperienceForm>
       </div>
     );
   }

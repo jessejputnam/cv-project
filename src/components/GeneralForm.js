@@ -4,6 +4,7 @@ class GeneralForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
+    // Gather input data
     const data = {
       name: e.target.nameInput.value,
       email: e.target.emailInput.value,
@@ -12,7 +13,15 @@ class GeneralForm extends Component {
       city: e.target.cityInput.value
     };
 
+    // Transfer input data to callback for parent
     this.props.parentCallbackGen(data);
+
+    // Reset input values
+    e.target.nameInput.value = "";
+    e.target.emailInput.value = "";
+    e.target.telInput.value = "";
+    e.target.streetInput.value = "";
+    e.target.cityInput.value = "";
   };
 
   render() {

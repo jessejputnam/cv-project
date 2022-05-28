@@ -12,6 +12,11 @@ class EducationForm extends Component {
     };
 
     this.props.parentCallbackEduc(data);
+
+    e.target.uniInput.value = "";
+    e.target.subInput.value = "";
+    e.target.educDateFrom.value = "";
+    e.target.educDateTo.value = "";
   };
 
   render() {

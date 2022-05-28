@@ -1,16 +1,38 @@
 import React, { Component } from "react";
 
 class ExperienceForm extends Component {
+  onSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      company: e.target.companyInput.value,
+      position: e.target.positionInput.value,
+      tasks: e.target.tasksInput.value
+        .trim()
+        .split(".")
+        .filter((task) => task !== ""),
+      dateFrom: e.target.expDateFrom.value,
+      dateTo: e.target.expDateTo.value
+    };
+
+    this.props.parentCallbackExp(data);
+
+    e.target.companyInput.value = "";
+    e.target.positionInput.value = "";
+    e.target.tasksInput.value = "";
+    e.target.expDateFrom.value = "";
+    e.target.expDateTo.value = "";
+  };
+
   render() {
     return (
       <div className='exp__form'>
         <hr />
-        <form>
+        <form onSubmit={this.onSubmit}>
           <label>Company: </label>
           <input
             type='text'
-            id='company-input'
-            name='company-input'
+            id='companyInput'
+            name='companyInput'
             placeholder='Company Name'
           ></input>
           <br />
@@ -18,8 +40,8 @@ class ExperienceForm extends Component {
           <label>Position: </label>
           <input
             type='text'
-            id='position-input'
-            name='position-input'
+            id='positionInput'
+            name='positionInput'
             placeholder='Senior position'
           ></input>
           <br />
@@ -29,8 +51,8 @@ class ExperienceForm extends Component {
             <br />
             <input
               type='text'
-              name='task-input'
-              id='task-input'
+              name='tasksInput'
+              id='tasksInput'
               placeholder='Task 1. Task 2. Task 3'
             ></input>
             <br />
@@ -39,8 +61,8 @@ class ExperienceForm extends Component {
           <label>From: </label>
           <input
             type='text'
-            name='exp-datefrom-input'
-            id='exp-datefrom-input'
+            name='expDateFrom'
+            id='expDateFrom'
             placeholder='June 2011'
           ></input>
           <br />
@@ -48,8 +70,8 @@ class ExperienceForm extends Component {
           <label>To: </label>
           <input
             type='text'
-            name='exp-dateto-input'
-            id='exp-dateto-input'
+            name='expDateTo'
+            id='expDateTo'
             placeholder='Present'
           ></input>
           <br />
