@@ -4,40 +4,81 @@ import { Education } from "./components/Education";
 import { Experience } from "./components/Experience";
 import { EducationForm } from "./components/EducationForm";
 import { GeneralForm } from "./components/GeneralForm";
+import { ExperienceForm } from "./components/ExperienceForm";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      name: "Jesse Putnam",
-      email: "jessejputnam@gmail.com",
-      phone: "(413) 345-9049",
-      address: ["24 Crooked Hill Rd", "Alford, MA 01230"],
+      name: "",
+      email: "",
+      phone: "",
+      address: [""],
 
       education: [
         {
-          uni: "University of Massachusetts Amherst",
-          deg: "Bachelor's Degree",
-          sub: "English Lit / Classics",
-          dates: ["Aug 2007", "May 2012"]
+          uni: "a",
+          deg: "",
+          sub: "",
+          dates: [""]
         }
       ],
 
       experience: [
         {
-          company: "KHS",
-          position: "Admin Specialist",
-          tasks: [
-            "Meeting with individual students",
-            "Assessing and incorporating IEPs to mainstream curriculum",
-            "Writing convention assistance"
-          ],
-          dates: ["Aug 2021", "Feb 2022"]
+          company: "",
+          position: "",
+          tasks: [""],
+          dates: [""]
         }
       ]
     };
   }
+
+  handleCallbackGen = (childData) => {
+    this.setState({
+      name: childData.name,
+      email: childData.email,
+      phone: childData.tel,
+      address: [childData.street, childData.city]
+    });
+  };
+
+  handleCallbackEduc = (childData) => {
+    console.log(this.state.education);
+    // If one education at least already filled out
+    if (this.state.education.length > 1) {
+      // Shallow copy of prev education array minus latest addition yet to be filled
+      const prevEduc = this.state.education.slice(
+        0,
+        this.state.education.length - 1
+      );
+
+      this.setState({
+        education: [
+          ...prevEduc,
+          {
+            uni: childData.uni,
+            deg: childData.deg,
+            sub: childData.sub,
+            dates: [childData.dateFrom, childData.dateTo]
+          }
+        ]
+      });
+    } else {
+      this.setState({
+        education: [
+          {
+            uni: childData.uni,
+            deg: childData.deg,
+            sub: childData.sub,
+            dates: [childData.dateFrom, childData.dateTo]
+          }
+        ]
+      });
+    }
+  };
 
   render() {
     return (
@@ -55,23 +96,38 @@ class App extends Component {
           <button className='btn__general--edit' type='button'>
             Edit
           </button>
-          <GeneralForm></GeneralForm>
+
+          <GeneralForm parentCallbackGen={this.handleCallbackGen}></GeneralForm>
         </div>
 
         <hr />
 
         <div className='education__container'>
-          <h2 className='education__title'>Education</h2>
+          <div className='education__title__container'>
+            <h2 className='education__title'>Education</h2>
+            <button type='button' id='educ__add'>
+              Add Education
+            </button>
+          </div>
           <Education education={this.state.education}></Education>
         </div>
 
-        <EducationForm></EducationForm>
+        <EducationForm
+          parentCallbackEduc={this.handleCallbackEduc}
+        ></EducationForm>
         <hr />
 
         <div className='experience__container'>
-          <h2 className='section__title experience__title'>Experience </h2>
+          <div className='experience__title__container'>
+            <h2 className='section__title experience__title'>Experience </h2>
+            <button type='button' id='exp__add'>
+              Add Experience
+            </button>
+          </div>
           <Experience experience={this.state.experience}></Experience>
         </div>
+
+        <ExperienceForm></ExperienceForm>
       </div>
     );
   }

@@ -1,17 +1,35 @@
 import React, { Component } from "react";
 
 class EducationForm extends Component {
+  onSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      uni: e.target.uniInput.value,
+      deg: e.target.degSelect.value,
+      sub: e.target.subInput.value,
+      dateFrom: e.target.educDateFrom.value,
+      dateTo: e.target.educDateFrom.value
+    };
+
+    this.props.parentCallbackEduc(data);
+  };
+
   render() {
     return (
       <div className='educ__form'>
         <hr />
-        <form>
+        <form onSubmit={this.onSubmit}>
           <label>University: </label>
-          <input type='text' id='uni-input' name='uni-input'></input>
+          <input
+            type='text'
+            id='uniInput'
+            name='uniInput'
+            placeholder='Tufts University'
+          ></input>
           <br />
 
           <label>Degree: </label>
-          <select name='deg-select' id='deg-select'>
+          <select name='degSelect' id='degSelect'>
             <optgroup label='Associate Degree'>
               <option value='AAS'>AAS</option>
               <option value='AA'>AA</option>
@@ -47,16 +65,33 @@ class EducationForm extends Component {
           <br />
 
           <label>Subject: </label>
-          <input type='text' name='sub-input' id='sub-input'></input>
+          <input
+            type='text'
+            name='subInput'
+            id='subInput'
+            placeholder='Computer Science'
+          ></input>
           <br />
 
           <label>From: </label>
-          <input type='text' name='datefrom-input' id='datefrom-input'></input>
+          <input
+            type='text'
+            name='educDateFrom'
+            id='educDateFrom'
+            placeholder='Aug 2007'
+          ></input>
           <br />
 
           <label>To: </label>
-          <input type='text' name='dateto-input' id='dateto-input'></input>
+          <input
+            type='text'
+            name='educDateTo'
+            id='educDateTo'
+            placeholder='May 2011'
+          ></input>
           <br />
+
+          <input type='submit' id='submit-educ'></input>
         </form>
         <hr />
       </div>
