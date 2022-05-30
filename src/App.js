@@ -15,31 +15,45 @@ class App extends Component {
     super();
 
     this.state = {
-      name: "",
-      email: "",
-      phone: "",
-      address: [""],
+      general: {
+        name: "",
+        email: "",
+        tel: "",
+        address: ["", ""]
+      },
+      displayGenForm: false,
 
-      education: [],
+      education: [
+        {
+          uni: "",
+          deg: "",
+          sub: "",
+          dates: ["", ""]
+        }
+      ],
       educEditIndex: 0,
+      displayEducForm: false,
 
       experience: [],
-      expEditIndex: 0
+      expEditIndex: 0,
+      displayExpForm: false
     };
   }
 
   // Opening general info edit form
   openGenEditMenu = (e) => {
-    console.log(e.target);
+    this.displayForm("Gen");
   };
 
   // Handling General Form submission
   handleCallbackGen = (childData) => {
     this.setState({
-      name: childData.name,
-      email: childData.email,
-      phone: childData.tel,
-      address: [childData.street, childData.city]
+      general: {
+        name: childData.name,
+        email: childData.email,
+        tel: childData.tel,
+        address: [childData.street, childData.city]
+      }
     });
   };
 
@@ -112,8 +126,6 @@ class App extends Component {
         }
       ]
     });
-
-    console.log(this.state.experience[0]);
   };
 
   // Handle Edit Education
@@ -121,22 +133,34 @@ class App extends Component {
     this.setState({
       educEditIndex: index
     });
-    console.log(this.state);
+  };
+
+  // Display forms function
+  displayForm = (formType) => {
+    const stateForm = `display${formType}Form`;
+    this.setState({
+      [stateForm]: !this.state[stateForm]
+    });
   };
 
   render() {
+    let genForm = null;
+    if (this.state.displayGenForm) {
+      genForm = (
+        <GeneralForm
+          data={this.state.general}
+          parentCallbackGen={this.handleCallbackGen}
+        ></GeneralForm>
+      );
+    }
+
     return (
       <div className='App'>
         <h1>CV Generator</h1>
 
         <div className='general__container'>
           <h2 className='general__title'>General Information</h2>
-          <GeneralInfo
-            name={this.state.name}
-            email={this.state.email}
-            phone={this.state.phone}
-            address={this.state.address}
-          ></GeneralInfo>
+          <GeneralInfo data={this.state.general}></GeneralInfo>
           <button
             onClick={this.openGenEditMenu}
             className='btn__general--edit'
@@ -144,8 +168,7 @@ class App extends Component {
           >
             Edit
           </button>
-
-          <GeneralForm parentCallbackGen={this.handleCallbackGen}></GeneralForm>
+          {genForm}
         </div>
 
         <hr />

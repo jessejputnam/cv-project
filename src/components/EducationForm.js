@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 
 class EducationForm extends Component {
-  // constructor() {
-  //   super();
+  constructor() {
+    super();
 
-  //   this.state = {
-  //     uni: "",
-  //     deg: "",
-  //     sub: "",
-  //     dateFrom: "",
-  //     dateTo: ""
-  //   };
-  // }
+    this.state = {
+      uni: "",
+      deg: "",
+      sub: "",
+      dateFrom: "",
+      dateTo: ""
+    };
+  }
 
-  // if ()
+  getData = () => {
+    this.setState({
+      uni: this.props.data.uni,
+      deg: this.props.data.deg,
+      sub: this.props.data.sub,
+      dateFrom: this.props.data.dateFrom,
+      dateTo: this.props.data.dateTo
+    });
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.props.data);
     const data = {
       uni: e.target.uniInput.value,
       deg: e.target.degSelect.value,

@@ -17,18 +17,18 @@ class GeneralInfo extends Component {
     return (
       <div>
         <p>
-          <strong>Name:</strong> {this.props.name}
+          <strong>Name:</strong> {this.props.data.name}
         </p>
         <p>
-          <strong>Email:</strong> {this.props.email}
+          <strong>Email:</strong> {this.props.data.email}
         </p>
         <p>
-          <strong>Phone:</strong> {this.props.phone}
+          <strong>Phone:</strong> {this.props.data.phone}
         </p>
         <p>
           <strong>Address:</strong>
         </p>
-        <AddressLines address={this.props.address}></AddressLines>
+        <AddressLines address={this.props.data.address}></AddressLines>
       </div>
     );
   }
