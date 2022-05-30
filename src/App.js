@@ -20,26 +20,20 @@ class App extends Component {
       phone: "",
       address: [""],
 
-      education: [
-        {
-          uni: "",
-          deg: "",
-          sub: "",
-          dates: [""]
-        }
-      ],
+      education: [],
+      educEditIndex: 0,
 
-      experience: [
-        {
-          company: "",
-          position: "",
-          tasks: [""],
-          dates: [""]
-        }
-      ]
+      experience: [],
+      expEditIndex: 0
     };
   }
 
+  // Opening general info edit form
+  openGenEditMenu = (e) => {
+    console.log(e.target);
+  };
+
+  // Handling General Form submission
   handleCallbackGen = (childData) => {
     this.setState({
       name: childData.name,
@@ -49,66 +43,85 @@ class App extends Component {
     });
   };
 
+  // Handling Education Form submission
   handleCallbackEduc = (childData) => {
-    // If one education at least already filled out
-    if (this.state.education.length > 1) {
-      // Shallow copy of prev education array minus latest addition yet to be filled
-      const prevEduc = copyPrevArr(this, "education");
-
-      this.setState({
-        education: [
-          ...prevEduc,
-          {
-            uni: childData.uni,
-            deg: childData.deg,
-            sub: childData.sub,
-            dates: [childData.dateFrom, childData.dateTo]
-          }
-        ]
-      });
-    } else {
-      this.setState({
-        education: [
-          {
-            uni: childData.uni,
-            deg: childData.deg,
-            sub: childData.sub,
-            dates: [childData.dateFrom, childData.dateTo]
-          }
-        ]
-      });
-    }
+    // Shallow copy of prev education array minus latest addition yet to be filled
+    const prevEduc = copyPrevArr(this, "education");
+    this.setState({
+      education: [
+        ...prevEduc,
+        {
+          uni: childData.uni,
+          deg: childData.deg,
+          sub: childData.sub,
+          dates: [childData.dateFrom, childData.dateTo]
+        }
+      ]
+    });
   };
 
+  // Handling Experience form submission
   handleCallbackExp = (childData) => {
-    // If one experience at least already filled out
-    if (this.state.experience.length > 1) {
-      // Shallow copy of prev experience array minus latest addition yet to be filled
-      const prevExp = copyPrevArr(this, "experience");
+    // Shallow copy of prev experience array minus latest addition yet to be filled
+    const prevExp = copyPrevArr(this, "experience");
 
-      this.setState({
-        experience: [
-          ...prevExp,
-          {
-            company: childData.company,
-            position: childData.position,
-            tasks: childData.tasks,
-            dates: [childData.dateFrom, childData.dateTo]
-          }
-        ]
-      });
-    } else {
-      this.setState({
-        experience: [
-          {
-            company: childData.company,
-            position: childData.position,
-            tasks: childData.tasks,
-            dates: [childData.dateFrom, childData.dateTo]
-          }
-        ]
-      });
-    }
+    this.setState({
+      experience: [
+        ...prevExp,
+        {
+          company: childData.company,
+          position: childData.position,
+          tasks: childData.tasks,
+          dates: [childData.dateFrom, childData.dateTo]
+        }
+      ]
+    });
+  };
+
+  // Handle Adding education experience
+  handleAddEduc = () => {
+    const prevEduc = this.state.education;
+    const educIndex = prevEduc.length;
+
+    this.setState({
+      education: [
+        ...prevEduc,
+        {
+          uni: "",
+          deg: "",
+          sub: "",
+          dates: [""]
+        }
+      ],
+      educEditIndex: educIndex
+    });
+  };
+
+  // Handle Adding work experience
+  handleAddExp = () => {
+    const prevExp = this.state.experience;
+
+    this.setState({
+      experience: [
+        ...prevExp,
+        {
+          company: "",
+          position: "",
+          tasks: [""],
+          dates: [""]
+        }
+      ]
+    });
+
+    console.log(this.state.experience[0]);
+  };
+
+  // Handle Edit Education
+  handleEditEduc = (index) => {
+    this.setState({
+      educEditIndex: index
+    });
+    console.log(this.state);
   };
 
   render() {
@@ -124,7 +137,11 @@ class App extends Component {
             phone={this.state.phone}
             address={this.state.address}
           ></GeneralInfo>
-          <button className='btn__general--edit' type='button'>
+          <button
+            onClick={this.openGenEditMenu}
+            className='btn__general--edit'
+            type='button'
+          >
             Edit
           </button>
 
@@ -136,14 +153,18 @@ class App extends Component {
         <div className='education__container'>
           <div className='education__title__container'>
             <h2 className='education__title'>Education</h2>
-            <button type='button' id='educ__add'>
+            <button onClick={this.handleAddEduc} type='button' id='educ__add'>
               Add Education
             </button>
           </div>
-          <Education education={this.state.education}></Education>
+          <Education
+            parentCallbackEducIndex={this.handleEditEduc}
+            education={this.state.education}
+          ></Education>
         </div>
 
         <EducationForm
+          data={this.state.education[this.state.educEditIndex]}
           parentCallbackEduc={this.handleCallbackEduc}
         ></EducationForm>
         <hr />
@@ -151,7 +172,7 @@ class App extends Component {
         <div className='experience__container'>
           <div className='experience__title__container'>
             <h2 className='section__title experience__title'>Experience </h2>
-            <button type='button' id='exp__add'>
+            <button onClick={this.handleAddExp} type='button' id='exp__add'>
               Add Experience
             </button>
           </div>

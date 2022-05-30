@@ -1,8 +1,23 @@
 import React, { Component } from "react";
 
 class EducationForm extends Component {
+  // constructor() {
+  //   super();
+
+  //   this.state = {
+  //     uni: "",
+  //     deg: "",
+  //     sub: "",
+  //     dateFrom: "",
+  //     dateTo: ""
+  //   };
+  // }
+
+  // if ()
+
   onSubmit = (e) => {
     e.preventDefault();
+    console.log(this.props.data);
     const data = {
       uni: e.target.uniInput.value,
       deg: e.target.degSelect.value,
@@ -30,6 +45,9 @@ class EducationForm extends Component {
             id='uniInput'
             name='uniInput'
             placeholder='Tufts University'
+            defaultValue={
+              this.props.data === undefined ? "" : this.props.data.uni
+            }
           ></input>
           <br />
 

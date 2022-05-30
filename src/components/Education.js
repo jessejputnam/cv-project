@@ -3,12 +3,18 @@ import { DatesList } from "./DatesList";
 import uniqid from "uniqid";
 
 class EducationItem extends Component {
+  onEdit = (e) => {
+    this.props.parentCallbackEducIndex(
+      +e.target.parentElement.parentElement.id.slice(9)
+    );
+  };
+
   render() {
     const educationArr = this.props.education;
-    const educationListItems = educationArr.map((item) => {
+    const educationListItems = educationArr.map((item, index) => {
       const id = uniqid();
       return (
-        <li key={id}>
+        <li id={"educIndex" + index} key={id}>
           <p>
             <strong>University: </strong>
             {item.uni}
@@ -26,7 +32,12 @@ class EducationItem extends Component {
             <DatesList dates={item.dates}></DatesList>
           </p>
           <div className='btns__container'>
-            <button id={id} className='btn__educ--edit' type='button'>
+            <button
+              onClick={this.onEdit}
+              id={id}
+              className='btn__educ--edit'
+              type='button'
+            >
               Edit
             </button>
             <button id={id} className='btn__educ--del' type='button'>
@@ -43,7 +54,12 @@ class EducationItem extends Component {
 
 class Education extends Component {
   render() {
-    return <EducationItem education={this.props.education}></EducationItem>;
+    return (
+      <EducationItem
+        parentCallbackEducIndex={this.props.parentCallbackEducIndex}
+        education={this.props.education}
+      ></EducationItem>
+    );
   }
 }
 
