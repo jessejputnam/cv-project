@@ -19,6 +19,10 @@ class GeneralForm extends Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
   }
 
+  onCancel = (e) => {
+    this.props.parentCallbackGenCancel(false);
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -75,7 +79,7 @@ class GeneralForm extends Component {
 
           <label>Phone: </label>
           <input
-            type='tel'
+            type='text'
             name='telInput'
             autoComplete='tel'
             placeholder='(413) 666-3091'
@@ -107,6 +111,9 @@ class GeneralForm extends Component {
           <br />
 
           <input type='submit' id='submit-general'></input>
+          <button onClick={this.onCancel} type='button' id='cancel-general'>
+            Cancel
+          </button>
         </form>
         <hr />
       </div>

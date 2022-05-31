@@ -23,7 +23,7 @@ class GeneralInfo extends Component {
           <strong>Email:</strong> {this.props.data.email}
         </p>
         <p>
-          <strong>Phone:</strong> {this.props.data.phone}
+          <strong>Phone:</strong> {this.props.data.tel}
         </p>
         <p>
           <strong>Address:</strong>

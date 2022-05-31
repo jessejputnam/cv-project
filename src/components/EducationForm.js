@@ -13,14 +13,8 @@ class EducationForm extends Component {
     };
   }
 
-  getData = () => {
-    this.setState({
-      uni: this.props.data.uni,
-      deg: this.props.data.deg,
-      sub: this.props.data.sub,
-      dateFrom: this.props.data.dateFrom,
-      dateTo: this.props.data.dateTo
-    });
+  onCancel = (e) => {
+    this.props.parentCallbackEducCancel(false);
   };
 
   onSubmit = (e) => {
@@ -35,10 +29,10 @@ class EducationForm extends Component {
 
     this.props.parentCallbackEduc(data);
 
-    e.target.uniInput.value = "";
-    e.target.subInput.value = "";
-    e.target.educDateFrom.value = "";
-    e.target.educDateTo.value = "";
+    // e.target.uniInput.value = "";
+    // e.target.subInput.value = "";
+    // e.target.educDateFrom.value = "";
+    // e.target.educDateTo.value = "";
   };
 
   render() {
@@ -100,6 +94,9 @@ class EducationForm extends Component {
             name='subInput'
             id='subInput'
             placeholder='Computer Science'
+            defaultValue={
+              this.props.data === undefined ? "" : this.props.data.sub
+            }
           ></input>
           <br />
 
@@ -109,6 +106,9 @@ class EducationForm extends Component {
             name='educDateFrom'
             id='educDateFrom'
             placeholder='Aug 2007'
+            defaultValue={
+              this.props.data === undefined ? "" : this.props.data.dateFrom
+            }
           ></input>
           <br />
 
@@ -118,10 +118,16 @@ class EducationForm extends Component {
             name='educDateTo'
             id='educDateTo'
             placeholder='May 2011'
+            defaultValue={
+              this.props.data === undefined ? "" : this.props.data.dateTo
+            }
           ></input>
           <br />
 
           <input type='submit' id='submit-educ'></input>
+          <button onClick={this.onCancel} type='button' id='cancel-general'>
+            Cancel
+          </button>
         </form>
         <hr />
       </div>

@@ -23,14 +23,7 @@ class App extends Component {
       },
       displayGenForm: false,
 
-      education: [
-        {
-          uni: "",
-          deg: "",
-          sub: "",
-          dates: ["", ""]
-        }
-      ],
+      education: [],
       educEditIndex: 0,
       displayEducForm: false,
 
@@ -41,8 +34,13 @@ class App extends Component {
   }
 
   // Opening general info edit form
-  openGenEditMenu = (e) => {
+  openGenEditMenu = () => {
     this.displayForm("Gen");
+  };
+
+  // Opening Education edit form
+  openEducForm = () => {
+    this.displayForm("Educ");
   };
 
   // Handling General Form submission
@@ -53,24 +51,62 @@ class App extends Component {
         email: childData.email,
         tel: childData.tel,
         address: [childData.street, childData.city]
-      }
+      },
+
+      displayGenForm: false
+    });
+  };
+
+  // Handling General Form cancel
+  handleCallbackGenCancel = (childData) => {
+    this.setState({
+      displayGenForm: childData
+    });
+  };
+
+  // Handling education form open on edit
+  handleCallbackEducEdit = (childData) => {
+    this.setState({
+      displayEducForm: true,
+      educEditIndex: childData
+    });
+  };
+
+  // Handling Education Form cancel
+  handleCallbackEducCancel = (childData) => {
+    this.setState({
+      displayEducForm: childData
+    });
+  };
+
+  // Handling Education item delete
+  handleCallbackEducDel = (childData) => {
+    const copyEducArr = this.state.education.slice();
+    copyEducArr.splice(childData, 1);
+
+    this.setState({
+      education: copyEducArr
     });
   };
 
   // Handling Education Form submission
   handleCallbackEduc = (childData) => {
-    // Shallow copy of prev education array minus latest addition yet to be filled
-    const prevEduc = copyPrevArr(this, "education");
+    // Create copy of array
+    const copyEducArr = this.state.education.slice();
+
+    // Replace array[index] for specified item
+    copyEducArr[this.state.educEditIndex] = {
+      uni: childData.uni,
+      deg: childData.deg,
+      sub: childData.sub,
+      dates: [childData.dateFrom, childData.dateTo]
+    };
+
+    // Set state with new array
     this.setState({
-      education: [
-        ...prevEduc,
-        {
-          uni: childData.uni,
-          deg: childData.deg,
-          sub: childData.sub,
-          dates: [childData.dateFrom, childData.dateTo]
-        }
-      ]
+      education: copyEducArr,
+
+      displayEducForm: false
     });
   };
 
@@ -128,19 +164,14 @@ class App extends Component {
     });
   };
 
-  // Handle Edit Education
-  handleEditEduc = (index) => {
-    this.setState({
-      educEditIndex: index
-    });
-  };
-
   // Display forms function
   displayForm = (formType) => {
     const stateForm = `display${formType}Form`;
-    this.setState({
-      [stateForm]: !this.state[stateForm]
-    });
+    if (!this.state[stateForm]) {
+      this.setState({
+        [stateForm]: !this.state[stateForm]
+      });
+    }
   };
 
   render() {
@@ -150,7 +181,19 @@ class App extends Component {
         <GeneralForm
           data={this.state.general}
           parentCallbackGen={this.handleCallbackGen}
+          parentCallbackGenCancel={this.handleCallbackGenCancel}
         ></GeneralForm>
+      );
+    }
+
+    let educForm = null;
+    if (this.state.displayEducForm) {
+      educForm = (
+        <EducationForm
+          data={this.state.education[this.state.educEditIndex]}
+          parentCallbackEducCancel={this.handleCallbackEducCancel}
+          parentCallbackEduc={this.handleCallbackEduc}
+        ></EducationForm>
       );
     }
 
@@ -181,15 +224,13 @@ class App extends Component {
             </button>
           </div>
           <Education
-            parentCallbackEducIndex={this.handleEditEduc}
+            parentCallbackEducIndexDel={this.handleCallbackEducDel}
+            parentCallbackEducIndexEdit={this.handleCallbackEducEdit}
             education={this.state.education}
           ></Education>
         </div>
 
-        <EducationForm
-          data={this.state.education[this.state.educEditIndex]}
-          parentCallbackEduc={this.handleCallbackEduc}
-        ></EducationForm>
+        {educForm}
         <hr />
 
         <div className='experience__container'>

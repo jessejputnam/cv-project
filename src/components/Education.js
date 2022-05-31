@@ -4,7 +4,13 @@ import uniqid from "uniqid";
 
 class EducationItem extends Component {
   onEdit = (e) => {
-    this.props.parentCallbackEducIndex(
+    this.props.parentCallbackEducIndexEdit(
+      +e.target.parentElement.parentElement.id.slice(9)
+    );
+  };
+
+  onDel = (e) => {
+    this.props.parentCallbackEducIndexDel(
       +e.target.parentElement.parentElement.id.slice(9)
     );
   };
@@ -13,6 +19,7 @@ class EducationItem extends Component {
     const educationArr = this.props.education;
     const educationListItems = educationArr.map((item, index) => {
       const id = uniqid();
+
       return (
         <li id={"educIndex" + index} key={id}>
           <p>
@@ -40,7 +47,12 @@ class EducationItem extends Component {
             >
               Edit
             </button>
-            <button id={id} className='btn__educ--del' type='button'>
+            <button
+              onClick={this.onDel}
+              id={id}
+              className='btn__educ--del'
+              type='button'
+            >
               Delete
             </button>
           </div>
@@ -56,7 +68,8 @@ class Education extends Component {
   render() {
     return (
       <EducationItem
-        parentCallbackEducIndex={this.props.parentCallbackEducIndex}
+        parentCallbackEducIndexEdit={this.props.parentCallbackEducIndexEdit}
+        parentCallbackEducIndexDel={this.props.parentCallbackEducIndexDel}
         education={this.props.education}
       ></EducationItem>
     );
