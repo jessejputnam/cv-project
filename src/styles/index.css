@@ -62,6 +62,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: clamp(300px, 70%, 500px);
 }
 
 .task__item {
@@ -99,4 +100,5 @@ body {
 
 .text-input {
   width: 70%;
+  padding: 3px 6px;
 }
