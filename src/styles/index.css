@@ -1,0 +1,102 @@
+/* 
+  TABLE OF CONTENTS:
+  # Fonts
+  # General Formatting
+  # Header
+  # Main App
+  # App Sections
+  # Forms
+*/
+
+/* ############# # FONTS ############## */
+
+/* ############# # GENERAL FORMATTING ############## */
+* {
+  list-style: none;
+  padding-left: 0;
+}
+
+html {
+  background-image: url("../images/leone-venter-VieM9BdZKFo-unsplash.jpg");
+  background-size: cover;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ############# # HEADER ############## */
+
+.header__container {
+  height: clamp(50px, 10vw, 90px);
+  margin-bottom: 20px;
+}
+
+.header__title {
+  line-height: clamp(50px, 10vw, 90px);
+  text-align: center;
+}
+
+/* ############# # MAIN APP ############## */
+
+.App {
+  width: 96vw;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.568);
+  padding: 8px 16px;
+  background-image: url("../images/kiwihug-y_2GC4EhOP4-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* ############# # APP SECTIONS ############## */
+.section__container {
+  margin: 20px 5px;
+}
+
+.section__header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task__item {
+  margin-left: 25px;
+  list-style: "⌟";
+}
+
+/* ############# # FORMS ############## */
+.form {
+  width: clamp(300px, 70%, 500px);
+  padding: 5px 10px;
+  background-color: #fffbf67e;
+  border-radius: 5px;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.411);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.form__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3px 0;
+}
+
+.form__row--tasks {
+  margin: -5px 0;
+}
+
+.small-text {
+  font-size: 0.7rem;
+  display: block;
+  margin-top: -5px;
+}
+
+.text-input {
+  width: 70%;
+}

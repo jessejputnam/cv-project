@@ -1,6 +1,22 @@
 import React, { Component } from "react";
 
 class ExperienceForm extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      company: "",
+      position: "",
+      tasks: [""],
+      dateFrom: "",
+      dateTo: ""
+    };
+  }
+
+  onCancel = (e) => {
+    this.props.parentCallbackExpCancel(false);
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -15,70 +31,93 @@ class ExperienceForm extends Component {
     };
 
     this.props.parentCallbackExp(data);
-
-    e.target.companyInput.value = "";
-    e.target.positionInput.value = "";
-    e.target.tasksInput.value = "";
-    e.target.expDateFrom.value = "";
-    e.target.expDateTo.value = "";
   };
 
   render() {
     return (
-      <div className='exp__form'>
-        <hr />
+      <div className='form'>
         <form onSubmit={this.onSubmit}>
-          <label>Company: </label>
-          <input
-            type='text'
-            id='companyInput'
-            name='companyInput'
-            placeholder='Company Name'
-          ></input>
-          <br />
-
-          <label>Position: </label>
-          <input
-            type='text'
-            id='positionInput'
-            name='positionInput'
-            placeholder='Senior position'
-          ></input>
-          <br />
-
-          <div className='maintasks__container'>
-            <label>Main Tasks (Separate tasks with period then space): </label>
-            <br />
+          <div className='form__row'>
+            <label>Company: </label>
             <input
+              className='text-input'
+              type='text'
+              id='companyInput'
+              name='companyInput'
+              placeholder='Company Name'
+              defaultValue={
+                this.props.data === undefined ? "" : this.props.data.company
+              }
+            ></input>
+          </div>
+
+          <div className='form__row'>
+            <label>Position: </label>
+            <input
+              className='text-input'
+              type='text'
+              id='positionInput'
+              name='positionInput'
+              placeholder='Senior position'
+              defaultValue={
+                this.props.data === undefined ? "" : this.props.data.position
+              }
+            ></input>
+          </div>
+
+          <div className='form__row form__row--tasks'>
+            <label>
+              Main Tasks:
+              <br />
+              <span className='small-text'>Separate with periods</span>
+            </label>
+            <input
+              className='text-input'
               type='text'
               name='tasksInput'
               id='tasksInput'
               placeholder='Task 1. Task 2. Task 3'
+              defaultValue={
+                this.props.data === undefined
+                  ? ""
+                  : this.props.data.tasks.join(". ")
+              }
             ></input>
-            <br />
           </div>
 
-          <label>From: </label>
-          <input
-            type='text'
-            name='expDateFrom'
-            id='expDateFrom'
-            placeholder='June 2011'
-          ></input>
-          <br />
+          <div className='form__row'>
+            <label>From: </label>
+            <input
+              className='text-input'
+              type='text'
+              name='expDateFrom'
+              id='expDateFrom'
+              placeholder='June 2011'
+              defaultValue={
+                this.props.data === undefined ? "" : this.props.data.dates[0]
+              }
+            ></input>
+          </div>
 
-          <label>To: </label>
-          <input
-            type='text'
-            name='expDateTo'
-            id='expDateTo'
-            placeholder='Present'
-          ></input>
-          <br />
+          <div className='form__row'>
+            <label>To: </label>
+            <input
+              className='text-input'
+              type='text'
+              name='expDateTo'
+              id='expDateTo'
+              placeholder='Present'
+              defaultValue={
+                this.props.data === undefined ? "" : this.props.data.dates[1]
+              }
+            ></input>
+          </div>
 
-          <input type='submit' id='submit-exp'></input>
+          <input type='submit'></input>
+          <button onClick={this.onCancel} type='button' id='cancel-general'>
+            Cancel
+          </button>
         </form>
-        <hr />
       </div>
     );
   }

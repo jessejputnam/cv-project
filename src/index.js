@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./styles/index.css";
+import "./styles/reset.css";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <div className='header__container'>
+      <h1 className='header__title'>CV Generator</h1>
+    </div>
+
     <App />
   </React.StrictMode>
 );

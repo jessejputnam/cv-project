@@ -6,10 +6,6 @@ import { EducationForm } from "./components/EducationForm";
 import { GeneralForm } from "./components/GeneralForm";
 import { ExperienceForm } from "./components/ExperienceForm";
 
-const copyPrevArr = (object, array) => {
-  return object.state[array].slice(0, object.state[array].length - 1);
-};
-
 class App extends Component {
   constructor() {
     super();
@@ -41,6 +37,11 @@ class App extends Component {
   // Opening Education edit form
   openEducForm = () => {
     this.displayForm("Educ");
+  };
+
+  // Opening experience edit form
+  openExpForm = () => {
+    this.displayForm("Exp");
   };
 
   // Handling General Form submission
@@ -110,21 +111,48 @@ class App extends Component {
     });
   };
 
-  // Handling Experience form submission
-  handleCallbackExp = (childData) => {
-    // Shallow copy of prev experience array minus latest addition yet to be filled
-    const prevExp = copyPrevArr(this, "experience");
+  // Handling experience form open on edit
+  handleCallbackExpEdit = (childData) => {
+    this.setState({
+      displayExpForm: true,
+      expEditIndex: childData
+    });
+  };
+
+  // Handling Education Form cancel
+  handleCallbackExpCancel = (childData) => {
+    this.setState({
+      displayExpForm: childData
+    });
+  };
+
+  // Handling Education item delete
+  handleCallbackExpDel = (childData) => {
+    const copyExpArr = this.state.experience.slice();
+    copyExpArr.splice(childData, 1);
 
     this.setState({
-      experience: [
-        ...prevExp,
-        {
-          company: childData.company,
-          position: childData.position,
-          tasks: childData.tasks,
-          dates: [childData.dateFrom, childData.dateTo]
-        }
-      ]
+      experience: copyExpArr
+    });
+  };
+
+  // Handling Experience form submission
+  handleCallbackExp = (childData) => {
+    // Create copy of array
+    const copyExpArr = this.state.experience.slice();
+
+    // Replace array[index] for specified item
+    copyExpArr[this.state.expEditIndex] = {
+      company: childData.company,
+      position: childData.position,
+      tasks: childData.tasks,
+      dates: [childData.dateFrom, childData.dateTo]
+    };
+
+    this.setState({
+      experience: copyExpArr,
+
+      displayExpForm: false
     });
   };
 
@@ -197,28 +225,39 @@ class App extends Component {
       );
     }
 
+    let expForm = null;
+    if (this.state.displayExpForm) {
+      expForm = (
+        <ExperienceForm
+          data={this.state.experience[this.state.expEditIndex]}
+          parentCallbackExpCancel={this.handleCallbackExpCancel}
+          parentCallbackExp={this.handleCallbackExp}
+        ></ExperienceForm>
+      );
+    }
+
     return (
       <div className='App'>
-        <h1>CV Generator</h1>
-
-        <div className='general__container'>
-          <h2 className='general__title'>General Information</h2>
+        <div className='section__container'>
+          <div className='section__header__container'>
+            <h2 className='section__title'>General Information</h2>
+            <button
+              onClick={this.openGenEditMenu}
+              className='btn__general--edit'
+              type='button'
+            >
+              Edit
+            </button>
+          </div>
           <GeneralInfo data={this.state.general}></GeneralInfo>
-          <button
-            onClick={this.openGenEditMenu}
-            className='btn__general--edit'
-            type='button'
-          >
-            Edit
-          </button>
           {genForm}
         </div>
 
         <hr />
 
-        <div className='education__container'>
-          <div className='education__title__container'>
-            <h2 className='education__title'>Education</h2>
+        <div className='section__container'>
+          <div className='section__header__container'>
+            <h2 className='section__title'>Education</h2>
             <button onClick={this.handleAddEduc} type='button' id='educ__add'>
               Add Education
             </button>
@@ -233,19 +272,21 @@ class App extends Component {
         {educForm}
         <hr />
 
-        <div className='experience__container'>
-          <div className='experience__title__container'>
-            <h2 className='section__title experience__title'>Experience </h2>
+        <div className='section__container'>
+          <div className='section__header__container'>
+            <h2 className='section__title'>Experience </h2>
             <button onClick={this.handleAddExp} type='button' id='exp__add'>
               Add Experience
             </button>
           </div>
-          <Experience experience={this.state.experience}></Experience>
+          <Experience
+            parentCallbackExpIndexDel={this.handleCallbackExpDel}
+            parentCallbackExpIndexEdit={this.handleCallbackExpEdit}
+            experience={this.state.experience}
+          ></Experience>
         </div>
 
-        <ExperienceForm
-          parentCallbackExp={this.handleCallbackExp}
-        ></ExperienceForm>
+        {expForm}
       </div>
     );
   }

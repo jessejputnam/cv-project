@@ -16,18 +16,9 @@ class GeneralInfo extends Component {
   render() {
     return (
       <div>
-        <p>
-          <strong>Name:</strong> {this.props.data.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {this.props.data.email}
-        </p>
-        <p>
-          <strong>Phone:</strong> {this.props.data.tel}
-        </p>
-        <p>
-          <strong>Address:</strong>
-        </p>
+        <p>{this.props.data.name}</p>
+        <p>{this.props.data.email}</p>
+        <p>{this.props.data.tel}</p>
         <AddressLines address={this.props.data.address}></AddressLines>
       </div>
     );

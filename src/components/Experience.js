@@ -5,19 +5,36 @@ import uniqid from "uniqid";
 class TaskItems extends Component {
   render() {
     const tasksArr = this.props.tasks;
-    const taskItems = tasksArr.map((task) => <li key={uniqid()}>{task}</li>);
+    const taskItems = tasksArr.map((task) => (
+      <li className='task__item' key={uniqid()}>
+        {task}
+      </li>
+    ));
 
-    return <ul>{taskItems}</ul>;
+    return <ul className='tasks__container'>{taskItems}</ul>;
   }
 }
 
 class ExperienceItems extends Component {
+  onEdit = (e) => {
+    this.props.parentCallbackExpIndexEdit(
+      +e.target.parentElement.parentElement.id.slice(8)
+    );
+  };
+
+  onDel = (e) => {
+    this.props.parentCallbackExpIndexDel(
+      +e.target.parentElement.parentElement.id.slice(8)
+    );
+  };
+
   render() {
     const experienceArr = this.props.experience;
-    const experienceListItems = experienceArr.map((item) => {
+    const experienceListItems = experienceArr.map((item, index) => {
       const id = uniqid();
+
       return (
-        <li key={id}>
+        <li id={"expIndex" + index} key={id}>
           <p>
             <strong>Company: </strong>
             {item.company}
@@ -35,10 +52,20 @@ class ExperienceItems extends Component {
             <DatesList dates={item.dates}></DatesList>
           </p>
           <div className='btns__container'>
-            <button id={id} className='btn__exp--edit' type='button'>
+            <button
+              onClick={this.onEdit}
+              id={id}
+              className='btn__exp--edit'
+              type='button'
+            >
               Edit
             </button>
-            <button id={id} className='btn__exp--del' type='button'>
+            <button
+              onClick={this.onDel}
+              id={id}
+              className='btn__exp--del'
+              type='button'
+            >
               Delete
             </button>
           </div>
@@ -53,7 +80,11 @@ class ExperienceItems extends Component {
 class Experience extends Component {
   render() {
     return (
-      <ExperienceItems experience={this.props.experience}></ExperienceItems>
+      <ExperienceItems
+        parentCallbackExpIndexEdit={this.props.parentCallbackExpIndexEdit}
+        parentCallbackExpIndexDel={this.props.parentCallbackExpIndexDel}
+        experience={this.props.experience}
+      ></ExperienceItems>
     );
   }
 }
