@@ -114,10 +114,10 @@ class ExperienceForm extends Component {
           </div>
 
           <div className='form__btn__container'>
-            <input type='submit'></input>
             <button onClick={this.onCancel} type='button' id='cancel-general'>
               Cancel
             </button>
+            <input type='submit'></input>
           </div>
         </form>
       </div>

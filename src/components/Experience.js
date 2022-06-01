@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { DatesList } from "./DatesList";
 import uniqid from "uniqid";
 
 class TaskItems extends Component {
@@ -39,27 +38,23 @@ class ExperienceItems extends Component {
           id={"expIndex" + index}
           key={id}
         >
-          <p>
-            <strong>Company: </strong>
-            {item.company}
-          </p>
-          <p>
-            <strong>Position: </strong>
-            {item.position}
-          </p>
-          <p>
-            <strong>Main tasks: </strong>
-          </p>
+          <div className='item__header'>
+            <h3>
+              {item.position.toUpperCase()}
+              <span className='small-text'>{item.company}</span>
+            </h3>
+            <p className='align-txt-right'>
+              {item.dates[0]} -
+              <br />
+              {item.dates[1]}
+            </p>
+          </div>
           <TaskItems tasks={item.tasks}></TaskItems>
-          <p>
-            <strong>Dates of employment: </strong>
-            <DatesList dates={item.dates}></DatesList>
-          </p>
           <div className='btns__container'>
             <button
               onClick={this.onEdit}
               id={id}
-              className='btn__exp--edit'
+              className='btn--cv'
               type='button'
             >
               Edit
@@ -67,13 +62,13 @@ class ExperienceItems extends Component {
             <button
               onClick={this.onDel}
               id={id}
-              className='btn__exp--del'
+              className='btn--cv'
               type='button'
             >
               Delete
             </button>
           </div>
-          <hr className='expitem__divider'></hr>
+          <div className='expitem__divider'></div>
         </li>
       );
     });

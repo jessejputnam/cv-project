@@ -22,7 +22,7 @@ class EducationForm extends Component {
     const data = {
       uni: e.target.uniInput.value,
       deg: e.target.degSelect.value,
-      sub: e.target.subInput.value,
+      sub: "(" + e.target.subInput.value + ")",
       dateFrom: e.target.educDateFrom.value,
       dateTo: e.target.educDateTo.value
     };
@@ -52,35 +52,35 @@ class EducationForm extends Component {
             <label>Degree: </label>
             <select name='degSelect' id='degSelect'>
               <optgroup label='Associate Degree'>
-                <option value='AAS'>AAS</option>
-                <option value='AA'>AA</option>
-                <option value='AS'>AS</option>
+                <option value='Associate of Applied Science'>AAS</option>
+                <option value='Associate of Arts'>AA</option>
+                <option value='Associate of Science'>AS</option>
               </optgroup>
               <optgroup label="Bachelor's Degree">
-                <option value='BAS'>BAS</option>
-                <option value='B.Arch.'>B.Arch.</option>
-                <option value='BA'>BA</option>
-                <option value='BBA'>BBA</option>
-                <option value='BFA'>BFA</option>
-                <option value='BS'>BS</option>
+                <option value='Bachelor of Applied Studies'>BAS</option>
+                <option value='Bachelor of Architecture'>B.Arch.</option>
+                <option value='Bachelor of Arts'>BA</option>
+                <option value='Bachelor of Business Administration'>BBA</option>
+                <option value='Bachelor of Fine Arts'>BFA</option>
+                <option value='Bachelor of Science'>BS</option>
               </optgroup>
               <optgroup label="Master's Degree">
-                <option value='MBA'>MBA</option>
-                <option value='M.Ed.'>M.Ed.</option>
-                <option value='MFA'>MFA</option>
-                <option value='LL.M.'>LL.M.</option>
-                <option value='MPA'>MPA</option>
-                <option value='MPH'>MPH</option>
-                <option value='MS'>MS</option>
-                <option value='MSW'>MSW</option>
+                <option value='Master of Arts'>MA</option>
+                <option value='Master of Business Administration'>MBA</option>
+                <option value='Master of Education'>M.Ed.</option>
+                <option value='Master of Fine Arts'>MFA</option>
+                <option value='Master of Public Administration'>MPA</option>
+                <option value='Master of Public Health'>MPH</option>
+                <option value='Master of Science'>MS</option>
+                <option value='Master of Social Work'>MSW</option>
               </optgroup>
               <optgroup label='Doctoral Degree'>
-                <option value='DBA'>DBA</option>
-                <option value='DDS'>DDS</option>
-                <option value='Ed.D.'>Ed.D.</option>
-                <option value='MD'>MD</option>
-                <option value='Ph.D.'>Ph.D.</option>
-                <option value='Psy.D'>Psy.D.</option>
+                <option value='Doctor of Business Administration'>DBA</option>
+                <option value='D'>DDS</option>
+                <option value='Doctor of Education'>Ed.D.</option>
+                <option value='Doctor of Medicine'>MD</option>
+                <option value='Doctor of Philosophy'>Ph.D.</option>
+                <option value='Doctor of Psychology'>Psy.D.</option>
               </optgroup>
             </select>
           </div>
@@ -128,10 +128,10 @@ class EducationForm extends Component {
           </div>
 
           <div className='form__btn__container'>
-            <input type='submit' id='submit-educ'></input>
             <button onClick={this.onCancel} type='button' id='cancel-general'>
               Cancel
             </button>
+            <input type='submit' id='submit-educ'></input>
           </div>
         </form>
       </div>

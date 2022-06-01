@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { DatesList } from "./DatesList";
 import uniqid from "uniqid";
 
 class EducationItem extends Component {
@@ -20,33 +19,44 @@ class EducationItem extends Component {
     const educationListItems = educationArr.map((item, index) => {
       const id = uniqid();
 
+      /*
+      
+        <div className='item__header'>
+            <h3>
+              {item.position.toUpperCase()}
+              <span className='small-text'>{item.company}</span>
+            </h3>
+            <p className='align-txt-right'>
+              {item.dates[0]} -
+              <br />
+              {item.dates[1]}
+            </p>
+          </div>
+
+      */
+
       return (
         <li
           className='section-item__container'
           id={"educIndex" + index}
           key={id}
         >
-          <p>
-            <strong>University: </strong>
-            {item.uni}
-          </p>
-          <p>
-            <strong>Degree: </strong>
-            {item.deg}
-          </p>
-          <p>
-            <strong>Subject: </strong>
-            {item.sub}
-          </p>
-          <p>
-            <strong>Dates of Study: </strong>
-            <DatesList dates={item.dates}></DatesList>
-          </p>
+          <div className='item__header--educ'>
+            <h3>
+              {item.deg} <span>{item.sub}</span>
+              <span className='small-text--no-margin'>{item.uni}</span>
+            </h3>
+            <p className='align-txt-right'>
+              {item.dates[0]} -
+              <br />
+              {item.dates[1]}
+            </p>
+          </div>
           <div className='btns__container'>
             <button
               onClick={this.onEdit}
               id={id}
-              className='btn__educ--edit'
+              className='btn--cv'
               type='button'
             >
               Edit
@@ -54,12 +64,13 @@ class EducationItem extends Component {
             <button
               onClick={this.onDel}
               id={id}
-              className='btn__educ--del'
+              className='btn--cv'
               type='button'
             >
               Delete
             </button>
           </div>
+          <div className='expitem__divider'></div>
         </li>
       );
     });

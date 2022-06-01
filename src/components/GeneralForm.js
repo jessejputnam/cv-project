@@ -120,10 +120,10 @@ class GeneralForm extends Component {
           </div>
 
           <div className='form__btn__container'>
-            <input type='submit' id='submit-general'></input>
             <button onClick={this.onCancel} type='button' id='cancel-general'>
               Cancel
             </button>
+            <input type='submit' id='submit-general'></input>
           </div>
         </form>
       </div>

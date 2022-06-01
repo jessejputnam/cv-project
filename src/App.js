@@ -245,8 +245,8 @@ class App extends Component {
               <h2 className='section__title'>Personal Information</h2>
               <button
                 onClick={this.openGenEditMenu}
-                className='btn__general--edit'
                 type='button'
+                className='btn--cv'
               >
                 Edit
               </button>
@@ -260,7 +260,11 @@ class App extends Component {
           <div className='section__container'>
             <div className='section__header__container'>
               <h2 className='section__title'>Experience </h2>
-              <button onClick={this.handleAddExp} type='button' id='exp__add'>
+              <button
+                onClick={this.handleAddExp}
+                type='button'
+                className='btn--cv'
+              >
                 Add Experience
               </button>
             </div>
@@ -275,7 +279,11 @@ class App extends Component {
           <div className='section__container'>
             <div className='section__header__container'>
               <h2 className='section__title'>Education</h2>
-              <button onClick={this.handleAddEduc} type='button' id='educ__add'>
+              <button
+                onClick={this.handleAddEduc}
+                type='button'
+                className='btn--cv'
+              >
                 Add Education
               </button>
             </div>

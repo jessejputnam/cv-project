@@ -5,11 +5,22 @@ import "./styles/index.css";
 import "./styles/reset.css";
 import reportWebVitals from "./reportWebVitals";
 
+const btnsCV = document.getElementsByClassName("btn--cv");
+
+const toggleBtns = function () {
+  [...btnsCV].forEach((btn) => {
+    btn.classList.toggle("btn-hidden");
+  });
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <div className='header__container'>
       <h1 className='header__title'>CV Generator</h1>
+      <button id='toggle-btn' type='button' onClick={toggleBtns}>
+        Toggle Buttons
+      </button>
     </div>
 
     <App />
