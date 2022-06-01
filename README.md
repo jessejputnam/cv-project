@@ -42,30 +42,20 @@ Programming process should include:
 ### Built with
 
 - Flexbox
-- Mobile-first workflow
-- Vanilla JavaScript
-- [Jest](https://jestjs.io/) - Testing framework
+- JavaScript
+- CSS
+- React
 - [Webpack](https://webpack.js.org/) - Module Bundler
 
 ### What I learned
 
-Three challenges appeared to hinder my progress during production:
+While the initial set up of components was time consuming, by the end, the component-driven design led to easy manipulation later on as I designed the view which the user would see.
 
-(1) Isolating what I wanted as a result of the test was difficult. I found often, at the beginnig especially, that my testing output would often test for a specific output rather than a general outcome. This led to issues with my tests looking for specific implementation over general outcome, forcing me to rewrite tests to accommodate for outcomes with less specific language.
+Managing information in React is difficult at first. I had some of the largest issues trying to figure out passing information back and forth between components while trying to maintain the unidirecitonal flow of information. However, once I started to realize that events in the components create their own properties which the APP parent-component listens for changes in, it finally started to click how effective this communication was.
 
-- Thinking harder about what outcome I want rather than an expression of that outcome should enable me to write tests that are implementation agnostic, allowing me to use tests regardless of the underlying implementation changes.
-
-(2) I found that I encoutered the need for new functionality as I was writing the visual interactive material. When these new functionalities presented themselves, I was deep in user DOM interaction, and found that, without paying attenition, I could sometimes couple my DOM interation too closely with my gaemflow logic.
-
-- More thorough planning in the beginning should tease out the needed functions earlier. In the event that I encounter the need for new functionality in the middle of the project, taking time to abstract the functionality should lead to saved time later while coding.
-
-(3) I waited until the end to enact the logic for allowing player choose ship placement. Because of decisions I made early on in how the ships were to be displayed, I had an issue in figuring out how to let players move those ships.
-
-- Eventully, I settled on using mouseover events to change the background color of the hovered square as well as teh adjacent squares according to ship size.
+The virtual DOM is incredibly useful.
 
 ### Continued development
 
-- I want to continue working TDD and writing tests prior to writing code. It was annoying at first, but as I had to change ideas on the fly to work with the accidental implications of my earlier code, having tests immediately ready that were implementation agnostic made those late stage changes much faster.
-
-- I want to look into more DOM manipulation, especially with drag and drop features. In retrospect, drag and drop could have been a more user friendly and visually impressive way of allowing users to choose ship positions.
-
+- I want to continue learning React -- it is a powerful tool over JavaScript which I look forward to using.
+- I want to look into design patterns for React, specifically, but also more generally. I am beginning to see where my trainerless autodicaticism is causing me struggles in design without proper exemplars or instructional aid.
