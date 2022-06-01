@@ -1,6 +1,6 @@
 # CV Generator
 
-An editable form to create professional looking CV or resume. Users are able to input personal information, experience, and education. Once entered, data is automatically formatted into CV form.
+An editable form that generates a professional looking CV or resume. Users are able to input personal information, experience, and education. Once entered, data is automatically formatted into CV form.
 
 ## Table of contents
 
@@ -26,9 +26,8 @@ Users should be able to:
 
 Programming process should include:
 
-- Focus on Test Driven Development
-- Isolating application functionality in a modular design pattern
-- Isolating DOM manipulation from game logic.
+- Using React to explore its functionality
+- Focus on state and prop, passing information between components
 
 ### Screenshot
 
@@ -36,7 +35,7 @@ Programming process should include:
 
 ### Links
 
-- Live Site URL: [Battleship](https://jessejputnam.github.io/battleship/)
+- Live Site URL: [CV Generator](https://jessejputnam.github.io/cv-project/)
 
 ## My process
 
