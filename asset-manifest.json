@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/cv-project/static/css/main.dd54c672.css",
+    "main.js": "/cv-project/static/js/main.b408c987.js",
+    "static/js/787.34a20539.chunk.js": "/cv-project/static/js/787.34a20539.chunk.js",
+    "static/media/kiwihug-zGZYQQVmXw0-unsplash.jpg": "/cv-project/static/media/kiwihug-zGZYQQVmXw0-unsplash.6f8badc951678cc28cd6.jpg",
+    "static/media/desk.jpg": "/cv-project/static/media/desk.09f1cbc19165a0ccdb72.jpg",
+    "static/media/icon-email.svg": "/cv-project/static/media/icon-email.6ad97a261311223886c3f5a46d4268e9.svg",
+    "index.html": "/cv-project/index.html",
+    "static/media/icon-phone.svg": "/cv-project/static/media/icon-phone.06267c6fd13021873a474018ef875f6a.svg",
+    "static/media/icon-home.svg": "/cv-project/static/media/icon-home.da8dc247945663318db39650311a2440.svg",
+    "main.dd54c672.css.map": "/cv-project/static/css/main.dd54c672.css.map",
+    "main.b408c987.js.map": "/cv-project/static/js/main.b408c987.js.map",
+    "787.34a20539.chunk.js.map": "/cv-project/static/js/787.34a20539.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd54c672.css",
+    "static/js/main.b408c987.js"
+  ]
+}
