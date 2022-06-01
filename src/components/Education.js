@@ -21,7 +21,11 @@ class EducationItem extends Component {
       const id = uniqid();
 
       return (
-        <li id={"educIndex" + index} key={id}>
+        <li
+          className='section-item__container'
+          id={"educIndex" + index}
+          key={id}
+        >
           <p>
             <strong>University: </strong>
             {item.uni}

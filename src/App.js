@@ -238,55 +238,55 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <div className='section__container'>
-          <div className='section__header__container'>
-            <h2 className='section__title'>General Information</h2>
-            <button
-              onClick={this.openGenEditMenu}
-              className='btn__general--edit'
-              type='button'
-            >
-              Edit
-            </button>
+        <div className='App__left-binding'></div>
+        <div className='App__left-half'>
+          <div className='section__container'>
+            <div className='section__header__container'>
+              <h2 className='section__title'>Personal Information</h2>
+              <button
+                onClick={this.openGenEditMenu}
+                className='btn__general--edit'
+                type='button'
+              >
+                Edit
+              </button>
+            </div>
+            <GeneralInfo data={this.state.general}></GeneralInfo>
+            {genForm}
           </div>
-          <GeneralInfo data={this.state.general}></GeneralInfo>
-          {genForm}
         </div>
 
-        <hr />
-
-        <div className='section__container'>
-          <div className='section__header__container'>
-            <h2 className='section__title'>Education</h2>
-            <button onClick={this.handleAddEduc} type='button' id='educ__add'>
-              Add Education
-            </button>
+        <div className='App__right-half'>
+          <div className='section__container'>
+            <div className='section__header__container'>
+              <h2 className='section__title'>Experience </h2>
+              <button onClick={this.handleAddExp} type='button' id='exp__add'>
+                Add Experience
+              </button>
+            </div>
+            {expForm}
+            <Experience
+              parentCallbackExpIndexDel={this.handleCallbackExpDel}
+              parentCallbackExpIndexEdit={this.handleCallbackExpEdit}
+              experience={this.state.experience}
+            ></Experience>
           </div>
-          <Education
-            parentCallbackEducIndexDel={this.handleCallbackEducDel}
-            parentCallbackEducIndexEdit={this.handleCallbackEducEdit}
-            education={this.state.education}
-          ></Education>
-        </div>
 
-        {educForm}
-        <hr />
-
-        <div className='section__container'>
-          <div className='section__header__container'>
-            <h2 className='section__title'>Experience </h2>
-            <button onClick={this.handleAddExp} type='button' id='exp__add'>
-              Add Experience
-            </button>
+          <div className='section__container'>
+            <div className='section__header__container'>
+              <h2 className='section__title'>Education</h2>
+              <button onClick={this.handleAddEduc} type='button' id='educ__add'>
+                Add Education
+              </button>
+            </div>
+            {educForm}
+            <Education
+              parentCallbackEducIndexDel={this.handleCallbackEducDel}
+              parentCallbackEducIndexEdit={this.handleCallbackEducEdit}
+              education={this.state.education}
+            ></Education>
           </div>
-          <Experience
-            parentCallbackExpIndexDel={this.handleCallbackExpDel}
-            parentCallbackExpIndexEdit={this.handleCallbackExpEdit}
-            experience={this.state.experience}
-          ></Experience>
         </div>
-
-        {expForm}
       </div>
     );
   }

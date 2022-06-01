@@ -127,10 +127,12 @@ class EducationForm extends Component {
             ></input>
           </div>
 
-          <input type='submit' id='submit-educ'></input>
-          <button onClick={this.onCancel} type='button' id='cancel-general'>
-            Cancel
-          </button>
+          <div className='form__btn__container'>
+            <input type='submit' id='submit-educ'></input>
+            <button onClick={this.onCancel} type='button' id='cancel-general'>
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     );

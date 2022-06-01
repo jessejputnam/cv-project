@@ -5,10 +5,35 @@
   # Header
   # Main App
   # App Sections
+  ## General
+  ## Experience
+  ## Eductation
   # Forms
+  # Media Queries
 */
 
 /* ############# # FONTS ############## */
+* {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+p,
+li {
+  font-size: 14px;
+  color: rgb(62, 62, 62);
+}
+
+.cv__name {
+  color: rgb(106, 105, 105);
+  font-size: 40px;
+  line-height: 45px;
+  text-shadow: 1px 1px 2px rgb(25, 25, 25);
+}
+
+.section__title {
+  color: rgb(238, 238, 238);
+  text-shadow: 1px 1px 2px rgb(25, 25, 25);
+}
 
 /* ############# # GENERAL FORMATTING ############## */
 * {
@@ -17,8 +42,11 @@
 }
 
 html {
-  background-image: url("../images/leone-venter-VieM9BdZKFo-unsplash.jpg");
+  background-image: url("../images/desk.jpg");
+  background-color: rgba(205, 205, 205, 0.221);
+  background-blend-mode: darken;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body {
@@ -28,6 +56,14 @@ body {
   align-items: center;
 }
 
+button,
+input[type="submit"] {
+  background-color: rgba(233, 244, 255, 0.448);
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: gray;
+  border-color: rgba(146, 146, 146, 0.362);
+}
 /* ############# # HEADER ############## */
 
 .header__container {
@@ -43,14 +79,36 @@ body {
 /* ############# # MAIN APP ############## */
 
 .App {
-  width: 96vw;
-  max-width: 800px;
+  width: 850px;
   border-radius: 10px;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.568);
-  padding: 8px 16px;
-  background-image: url("../images/kiwihug-y_2GC4EhOP4-unsplash.jpg");
+  background-image: url("../images/kiwihug-zGZYQQVmXw0-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+}
+
+.App__left-binding {
+  width: 5%;
+  background-color: #a2a2a2;
+  opacity: 0.7;
+  background: linear-gradient(135deg, #44365c55 25%, transparent 25%) -14px 0/
+      28px 28px,
+    linear-gradient(225deg, #44365c 25%, transparent 25%) -14px 0/ 28px 28px,
+    linear-gradient(315deg, #44365c55 25%, transparent 25%) 0px 0/ 28px 28px,
+    linear-gradient(45deg, #44365c 25%, #a2a2a2 25%) 0px 0/ 28px 28px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.App__left-half {
+  width: 27.5%;
+}
+
+.App__right-half {
+  width: 67.5%;
+  border-left: inset 1px white;
 }
 
 /* ############# # APP SECTIONS ############## */
@@ -62,23 +120,57 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: clamp(300px, 70%, 500px);
+  padding: 5px 10px;
+  background-color: rgba(152, 153, 165, 0.269);
+}
+
+.section-item__container {
+  margin-left: 15px;
+}
+
+.btns__container {
+  margin-top: 10px;
+  display: flex;
+  column-gap: 10px;
+}
+
+/* ############# ## GENERAL ############## */
+.general__row {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  margin-bottom: 20px;
+}
+
+.general__row--address {
+  align-items: flex-start;
+}
+
+/* ############# ## EXPERIENCE ############## */
+
+.expitem__divider {
+  width: 30%;
+  margin: 5px auto 15px;
 }
 
 .task__item {
   margin-left: 25px;
-  list-style: "⌟";
+  list-style: circle;
 }
+
+/* ############# ## EDUCATION ############## */
 
 /* ############# # FORMS ############## */
 .form {
-  width: clamp(300px, 70%, 500px);
+  width: 450px;
+  height: 210px;
   padding: 5px 10px;
-  background-color: #fffbf67e;
+  background-color: #fffbf6ba;
   border-radius: 5px;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.411);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  position: absolute;
 }
 
 .form__row {
@@ -101,4 +193,33 @@ body {
 .text-input {
   width: 70%;
   padding: 3px 6px;
+}
+
+.form__btn__container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* ############# # MEDIA QUERIES ############## */
+@media only screen and (max-width: 1330px) {
+  html {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .App {
+    width: 98vw;
+    flex-direction: column;
+  }
+
+  .App__left-half {
+    width: 100%;
+  }
+
+  .App__right-half {
+    width: 100%;
+  }
 }

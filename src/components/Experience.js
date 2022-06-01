@@ -34,7 +34,11 @@ class ExperienceItems extends Component {
       const id = uniqid();
 
       return (
-        <li id={"expIndex" + index} key={id}>
+        <li
+          className='section-item__container'
+          id={"expIndex" + index}
+          key={id}
+        >
           <p>
             <strong>Company: </strong>
             {item.company}
@@ -69,6 +73,7 @@ class ExperienceItems extends Component {
               Delete
             </button>
           </div>
+          <hr className='expitem__divider'></hr>
         </li>
       );
     });
