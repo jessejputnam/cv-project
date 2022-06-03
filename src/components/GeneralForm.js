@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const GeneralForm = function (props) {
   let [name, setName] = useState(props.data.name);
@@ -15,7 +15,7 @@ const GeneralForm = function (props) {
     props.parentCallbackGen(data);
   };
 
-  const onCancel = (e) => props.parentCallbackGenCancel(false);
+  const onCancel = () => props.parentCallbackGenCancel(false);
 
   return (
     <div className='form'>

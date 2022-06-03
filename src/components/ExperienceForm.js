@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const ExperienceForm = function (props) {
-  const onCancel = (e) => props.parentCallbackExpCancel(false);
+  const onCancel = () => props.parentCallbackExpCancel(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
